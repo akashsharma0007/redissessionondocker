@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>ToysRus</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <div class="page-icon">
+        <a th:href="@{/}"><img th:src="@{/images/icon.jpg}" /></a>
+    </div>
+</header>
+<div class="home-container">
+    <div class="home-row">
+
+        <h3 class="custom-h3">Toy List</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Toy Name</th>
+                <th>Toy Description</th>
+                <th>Toy Prize</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i : ${toys}" >
+                <td th:text="${i.toyName}"></td>
+                <td th:text="${i.toyDesc}"></td>
+                <td th:text="${i.toyPrize}"></td>
+                <td>
+                    <form th:action="@{/retrieveUpdateItemPage(id=${i.toyId})}" method="POST">
+                        <input type="submit" value="Edit"/>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/removeToyById(id=${i.toyId})}" method="POST">
+                        <input type="submit" value="Delete" style="
+            background: #ed1c1c; cursor:pointer;
+         "/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="add-item">
+        <h3 class="custom-h3">ADD TOY</h3>
+            <form th:action="@{/setToy}" method="POST" th:object="${toy}">
+                <div class="form-group">
+                    <label>Toy Name</label>
+                    <input type="text" class="form-control" th:field="*{toyName}" />
+                </div>
+                <div class="form-group">
+                    <label>Toy Description</label>
+                    <input type="text" class="form-control" th:field="*{toyDesc}" />
+                </div>
+                <div class="form-group">
+                    <label>Toy Prize</label>
+                    <input type="text" class="form-control" th:field="*{toyPrize}" />
+                </div>
+                <input type="submit" value="Save" />
+            </form>
+
+    </div>
+
+
+</div>
+<footer>
+<div class="footer-img">
+    <a th:href="@{/}"><img th:src="@{/images/icon.jpg}" /></a>
+</div>
+
+<ul>
+    <li><a href="#" target="_blank">Contact us</a></li>
+    <li><a href="#" target="_blank">About us</a></li>
+</ul>
+<div class="copyright">© Copyright ToyRus, 2022</div>
+</footer>
+</body>
+</html>

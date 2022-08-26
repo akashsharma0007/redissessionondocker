@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToysRus</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <div class="page-icon">
+        <a th:href="@{/}"><img th:src="@{/images/icon.jpg}" /></a>
+    </div>
+
+    <div class="header-btn">
+        <form th:action="@{/deleteSession}" method="post">
+            <button type="submit">Sign Out</button>
+        </form>
+    </div>
+
+</header>
+
+
+
+<div class="container">
+    <div class="row">
+        <h3 class="custom-h3">TOY IN CART</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Toy Name</th>
+                <th>Toy Description</th>
+                <th>Toy Prize</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="toy : ${toys}" >
+                <td th:text="${toy.toyName}"></td>
+                <td th:text="${toy.toyDesc}"></td>
+                <td th:text="${toy.toyPrize}"></td>
+                <td>
+                    <form th:action="@{/removeItemFromCart(id=${toy.toyId})}" method="post">
+                        <input type="submit" value="Delete" style="background: #fe0000;"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<footer>
+<div class="footer-img">
+    <a th:href="@{/}"><img th:src="@{/images/icon.jpg}" /></a>
+</div>
+
+<ul>
+    <li><a href="#" target="_blank">Contact us</a></li>
+    <li><a href="#" target="_blank">About us</a></li>
+</ul>
+<div class="copyright">© Copyright ToyRus, 2022</div>
+</footer>
+</body>
+</html>

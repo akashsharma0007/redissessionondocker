@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToysRus</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<header>
+
+    <div class="page-icon">
+        <a th:href="@{/}"><img th:src="@{/images/icon.jpg}" /></a>
+    </div>
+    <div class="header-btn">
+        <form th:action="@{/retrieveAdminPage}" method="get">
+            <button type="submit">Admin</button>
+        </form>
+        <form th:action="@{/retrieveCart}" method="GET">
+            <button type="submit">
+                <span th:text="${count}" class="cart-count"/>
+                in Cart</button>
+        </form>
+    </div>
+
+</header>
+
+
+
+<div class="home-container">
+    <div class="about-us">
+        <h3 class=""custom-h3>ToysRus</h3>
+        <p style="text-align: justify;">
+            Toys "R" Us Canada Ltd., also known in Canada as Toys "R" Us, is a Canadian chain of toy stores owned by billionaire businessman Doug Putman (who also owns FYE). The Canadian expansion of the American Toys "R" Us began in 1984.[1] The parent company filed for Chapter 11 bankruptcy protection in September 2017, closing all U.S. locations the following March.[2]
+<br>
+            The Canadian subsidiary and related trademarks were sold off to Fairfax Financial in June 2018.[3] Currently, Toys "R" Us Canada comprises 81 stores,[1] which continue to operate under the Toys "R" Us name. The company is headquartered in Concord (Vaughan), Ontario.[4]
+<br>
+            In 2021, FYE and Sunrise Records (also known as HMV) owner Doug Putman, through his Putman Investments, announced he would buy Toys "R" Us Canada from Fairfax Financial.[5]
+<br>
+            Toys "R" Us Canada is a participant in the voluntary Scanner Price Accuracy Code managed by the Retail Council of Canada.[6]
+        </p>
+    </div>
+    <div class="home-row">
+
+            <h3 class="custom-h3">TOY LIST</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Toy Name</th>
+                    <th>Toy Description</th>
+                    <th>Toy Prize</th>
+                    <th>Cart</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="toy : ${toys}" th:style="${toy.isCartItemActive=='Y' ? 'background : #b80c0c; color:white' : 'background : #ffffff'}">
+                    <td th:text="${toy.toyName}"></td>
+                    <td th:text="${toy.toyDesc}"></td>
+                    <td th:text="${toy.toyPrize}"></td>
+                    <td>
+                        <form th:action="@{/setItemToCart(id=${toy.toyId})}" method="POST">
+                            <input type="submit" value="Add to Cart"/>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+
+</div>
+
+<footer>
+    <div class="footer-img">
+        <a th:href="@{/}"><img th:src="@{/images/icon.jpg}" /></a>
+    </div>
+
+    <ul>
+        <li><a href="#" target="_blank">Contact us</a></li>
+        <li><a href="#" target="_blank">About us</a></li>
+    </ul>
+    <div class="copyright">© Copyright ToyRus, 2022</div>
+</footer>
+</body>
+</html>

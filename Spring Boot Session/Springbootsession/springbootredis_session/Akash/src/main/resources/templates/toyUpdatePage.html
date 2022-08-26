@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>ToysRus</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <div class="page-icon">
+        <a th:href="@{/}"><img th:src="@{/images/icon.jpg}" /></a>
+    </div>
+    <div class="header-btn">
+        <form th:action="@{/retrieveAdminPage}" method="get">
+            <button type="submit">Admin</button>
+        </form>
+    </div>
+</header>
+<div class="container">
+        <h3 class="custom-h3">UPDATE TOY</h3>
+        <form th:action="@{/updateToy(id=${item.toyId})}" method="POST" th:object="${toy}">
+            <div class="form-group">
+                <label>Toy Name</label>
+                <input type="text" class="form-control" th:field="*{toyName}" /><br/>
+            </div>
+            <div class="form-group">
+                <label>Toy Description</label>
+                <input type="text" class="form-control" th:field="*{toyDesc}" /><br/>
+            </div>
+            <div class="form-group">
+                <label>Toy Prize</label>
+                <input type="text" class="form-control" th:field="*{toyPrize}" /><br/>
+            </div>
+            <input type="submit" value="Save" />
+
+        </form>
+
+</div>
+<footer>
+<div class="footer-img">
+    <a th:href="@{/}"><img th:src="@{/images/icon.jpg}" /></a>
+</div>
+
+<ul>
+    <li><a href="#" target="_blank">Contact us</a></li>
+    <li><a href="#" target="_blank">About us</a></li>
+</ul>
+<div class="copyright">© Copyright ToyRus, 2022</div>
+</footer>
+</body>
+</html>
